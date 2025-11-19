@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Emoji.css"
+import { Icone } from "./Coracao";
 const EMOJIS = new Map<string, string>(
     [
         ["hot", "😈"],
@@ -42,16 +43,42 @@ export  default function Emoji(){
         setSituacao("soldado")
         setFrase("soldado");
     }
+
+    function toProx(){
+        switch(situacao){
+            case "hot":
+                ficaDoente();
+                break;
+            case "sick":
+                ficaSilence();
+                break;
+            case "silence":
+                queroSerSeuSoldado();
+                break;
+            default:
+                ficaQuente();
+                break;
+        }
+    }
     return(
         <>
         <div className="emoji">
-            {EMOJIS.get(situacao)|| "🥶"}
+            <div className="situacao">
+                {EMOJIS.get(situacao)|| "🥶"}
+                </div>
             {FRASE.get(frase)||"Fica frio ai"}
         </div>
+        <div className="atributo">
+            <Icone im="❤️" ></Icone>
+        </div>
+            <div className="acoes">
             <button onClick={ficaQuente}>hot</button>
             <button onClick={ficaDoente}>sick</button>
             <button onClick={ficaSilence}>silence</button>
             <button onClick={queroSerSeuSoldado}>soldado</button>
+            <button onClick={toProx}>roda todos</button>
+        </div>
+
         </>
     )
 }

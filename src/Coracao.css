@@ -1,0 +1,10 @@
+.coracao{
+    display: flex;
+    .ativo{
+        scale: 1.1;
+    }
+    .inativo{
+        filter: grayscale(100%);
+        opacity: 0.4;
+    }
+}
