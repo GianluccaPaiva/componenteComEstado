@@ -3,83 +3,63 @@ import "./Emoji.css"
 import { Icone } from "./Coracao";
 const EMOJIS = new Map<string, string>(
     [
-        ["hot", "😈"],
-        ["sick", "🥴"],
-        ["silence","🤫"],
-        ["soldado", "🫡"],
+        ["vivo", "🙂"],
+        ["doente", "🥴"],
+        ["morto","☠️"]
     ]
 );
-const FRASE = new Map<string, string>(
-    [
-        ["hot", "O pai ta quente"],
-        ["sick", "Eu bebi, mas paro quando quiser"],
-        ["silence","Não grita!"],
-        ["soldado", "Soldado, sempre serei seu soldado"],
-    ]
-);
+
 export  default function Emoji(){
-    const [situacao, setSituacao] = useState("hot");
-    const [frase, setFrase] = useState("hot");
+    let situacao = "vivo";
+    const [saude,setSaude] = useState(4);
+    const [energia,setEnergia] = useState(3);
+    const [agua,setAgua] = useState(2);
+    const [comida,setComida] = useState(1);
+    
+    if(saude === 0){
+        situacao = "morto";
+    }
+    else if(saude <= 3){
+        situacao = "doente";
+    }
+
+    function alimenta(){
+        setComida(Math.min(5,comida+1));
+    }
+    function hidatar(){
+        setAgua(Math.min(5,agua+1));
+    }
+    function  desligarLigar(){
+        
+    }
+
+    function ciclo(){
+        setComida(Math.max(0, comida - 1));
+        setAgua(Math.max(0, agua - 1));
+        setEnergia(Math.max(0, energia - 1));
+        setSaude((saude)=>{if(comida ===0) {return Math.max(0, saude - 1)}else{return saude}});
+        setSaude((saude)=>{if(agua ===0) {return Math.max(0, saude - 1)}else{return saude}});
+        setSaude((saude)=>{if(energia ===0) {return Math.max(0, saude - 1)}else{return saude}});
+    }
     console.log("Desenho: ",situacao);
-    function ficaDoente(){
-        console.log("Desenho: ",situacao);
-        setSituacao("sick");
-        setFrase("sick");
-    }
-    function ficaQuente(){
-        console.log("Desenho: ",situacao);
-        setSituacao("hot");
-        setFrase("hot")
-    }
-    function ficaSilence(){
-        console.log("Desenho: ",situacao);
-        setSituacao("silence");
-        setFrase("silence")
-
-    }
-    function queroSerSeuSoldado(){
-        console.log("Soldado, quero ser seu soldado");
-        console.log("Desenho: ",situacao);
-        setSituacao("soldado")
-        setFrase("soldado");
-    }
-
-    function toProx(){
-        switch(situacao){
-            case "hot":
-                ficaDoente();
-                break;
-            case "sick":
-                ficaSilence();
-                break;
-            case "silence":
-                queroSerSeuSoldado();
-                break;
-            default:
-                ficaQuente();
-                break;
-        }
-    }
     return(
         <>
         <div className="emoji">
             <div className="situacao">
                 {EMOJIS.get(situacao)|| "🥶"}
                 </div>
-            {FRASE.get(frase)||"Fica frio ai"}
         </div>
         <div className="atributo">
-            <Icone im="❤️" ></Icone>
-            <Icone im="💧" ></Icone>
-            <Icone im="🍗" ></Icone>
-            <Icone im="⚡" ></Icone>
+            <Icone icone="❤️" valor = {saude}></Icone>
+            <Icone icone="💧" valor = {agua}></Icone>
+            <Icone icone="🍗" valor = {comida} ></Icone>
+            <Icone icone="⚡" valor = {energia}></Icone>
         </div>
             <div className="acoes">
-            <button onClick={ficaQuente}>hot</button>
-            <button onClick={ficaDoente}>sick</button>
-            <button onClick={ficaSilence}>silence</button>
-            <button onClick={queroSerSeuSoldado}>soldado</button>
-            <button onClick={toProx}>roda todos</button>
+            <button onClick={alimenta}>Dar comida</button>
+            <button onClick={hidatar}>Beber água</button>
+            <button onClick={desligarLigar}>Desligar/Ligar Luz</button>
+            <button onClick={ciclo}>É o ciclo sem fim</button>
         </div>
 
         </>
