@@ -70,6 +70,9 @@ export  default function Emoji(){
         </div>
         <div className="atributo">
             <Icone im="❤️" ></Icone>
+            <Icone im="💧" ></Icone>
+            <Icone im="🍗" ></Icone>
+            <Icone im="⚡" ></Icone>
         </div>
             <div className="acoes">
             <button onClick={ficaQuente}>hot</button>
