@@ -98,7 +98,21 @@ export  default function Emoji(){
                 saude:Math.max(0, prevEmoji.saude - 1)
             }:prevEmoji
         ))
-
+        //ou da maneira mais simples:
+        const newEmoji = structuredClone(emoji);
+        newEmoji.comida =Math.max(0, emoji.comida - 1);
+        newEmoji.agua = Math.max(0, emoji.agua - 1);
+        newEmoji.energia = Math.max(0, emoji.energia - 1);
+        if(emoji.comida ===0){
+            newEmoji.saude = Math.max(0, newEmoji.saude - 1)
+        }
+        if(emoji.agua ===0){
+            newEmoji.saude = Math.max(0, newEmoji.saude - 1)
+        }
+        if(emoji.energia ===0){
+            newEmoji.saude = Math.max(0, newEmoji.saude - 1)
+        }
+        setEmoji(newEmoji);
     }
     console.log("Desenho: ",situacao);
     return(
