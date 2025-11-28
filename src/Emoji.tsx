@@ -24,9 +24,11 @@ export  default function Emoji(){
     }
 
     function alimenta(){
+        if(saude == 0)return;
         setComida(Math.min(5,comida+1));
     }
     function hidatar(){
+        if(saude == 0)return;
         setAgua(Math.min(5,agua+1));
     }
     function  desligarLigar(){
@@ -34,6 +36,7 @@ export  default function Emoji(){
     }
 
     function ciclo(){
+        if(saude == 0)return;
         setComida(Math.max(0, comida - 1));
         setAgua(Math.max(0, agua - 1));
         setEnergia(Math.max(0, energia - 1));
@@ -50,10 +53,10 @@ export  default function Emoji(){
                 </div>
         </div>
         <div className="atributo">
-            <Icone icone="❤️" valor = {saude}></Icone>
-            <Icone icone="💧" valor = {agua}></Icone>
+            <Icone icone="❤️" valor = {saude}  ></Icone>
+            <Icone icone="💧" valor = {agua}   ></Icone>
             <Icone icone="🍗" valor = {comida} ></Icone>
-            <Icone icone="⚡" valor = {energia}></Icone>
+            <Icone icone="⚡"  valor = {energia}></Icone>
         </div>
             <div className="acoes">
             <button onClick={alimenta}>Dar comida</button>
