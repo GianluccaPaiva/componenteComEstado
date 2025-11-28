@@ -37,9 +37,9 @@ export  default function Emoji(){
         setComida(Math.max(0, comida - 1));
         setAgua(Math.max(0, agua - 1));
         setEnergia(Math.max(0, energia - 1));
-        setSaude((saude)=>{if(comida ===0) {return Math.max(0, saude - 1)}else{return saude}});
-        setSaude((saude)=>{if(agua ===0) {return Math.max(0, saude - 1)}else{return saude}});
-        setSaude((saude)=>{if(energia ===0) {return Math.max(0, saude - 1)}else{return saude}});
+        setSaude((prevSaude)=>{if(comida ===0) {return Math.max(0, prevSaude - 1)}else{return prevSaude}});
+        setSaude((prevSaude)=>{if(agua ===0) {return Math.max(0, prevSaude - 1)}else{return prevSaude}});
+        setSaude((prevSaude)=>{if(energia ===0) {return Math.max(0, prevSaude - 1)}else{return prevSaude}});
     }
     console.log("Desenho: ",situacao);
     return(
